@@ -3,7 +3,7 @@ Objective: Create code, report, and video to explain our DL model.
 Week 1 (due 4/20) 
 -Understand Milestone 3 requirements (milestone 3 due 5/11)
 -Understand the deepAI GitHub Page (includes paper, colab, and everything else) 
--Understanding the objective and goal of deepAI
+-Understanding the objective and goal of deepAI (model architecture, parameters, inputs, outputs)
 
 Week 2 (due 4/27) 
 -Replicate the papers results in our own code (implement code and replicate numerical results from model) 
