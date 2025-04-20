@@ -2,9 +2,9 @@
 
 **Week 1 (due 4/20)**
 
-[ ] Understand Milestone 3 requirements (milestone 3 due 5/11)
+- [ ] Understand Milestone 3 requirements (milestone 3 due 5/11)
 
-[ ] Understand the deepAI GitHub Page (includes paper, colab, and everything else) 
+- [ ] Understand the deepAI GitHub Page (includes paper, colab, and everything else) 
 
 - Understanding the objective and goal of deepAI (model architecture, parameters, inputs, outputs)
 
