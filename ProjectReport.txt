@@ -7,7 +7,7 @@ Week 1 (due 4/20)
 
 Week 2 (due 4/27) 
 -Replicate the papers results in our own code (implement code and replicate numerical results from model) 
--Discuss who is going to work on expirementing with each section (preprocessing) 
+-Discuss who is going to work on experimenting with each section (preprocessing) 
 -Perhaps each person will experiment their own version of each section (one person does one type of preprocessing, one person another, etc.) 
 -Each person experiment with code on their own end
 -Only adding code to existing colab with consensus from group 
