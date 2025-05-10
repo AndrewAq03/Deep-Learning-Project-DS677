@@ -34,80 +34,92 @@
 
 -----
 DeepAI: Further Novel Applications of Deep Autoencoder Networks to Detect Anomalies in Large-Scale Financial and Accounting Data
-
 Akhil Sreedhara, Andrew Aquino, Nicholas Gresh
-NJIT, Newark, NJ [names] @ njit.edu
+New Jersey Institute of Technology, Newark, NJ
+{as3638, ama347, ng584} @njit.edu
 DS 677
 11 May 2025
------
 Video presentation link here*
 GitHub Project Link
-----
-Abstract 
-In the modern world, financial and accounting data is vast and complex. With advances in technology, big data and its management is a large industry. With the scale of big data, systems are so large and complex that mistakes and fraud are inevitable. This has consequences for corporations, so there is a business incentive to account for, identify, and manage such risks. If possible, prevention is best. In a paper from (CITE original paper here) the researchers used an autoencoder for financial data and analysis, instead of the typical autoencoder usage for images. In this sense the original paper had a novel approach. In this paper, we seek to implement and analyze the model, specifically the effects of tuning hyperparameters and model architecture. We seek to build on the model and see if we can tweak it to learn what makes the model successful. 
-Introduction 
-First, we sought to implement the code from the original paper, then test our own tweaks and see the effect of different hyperparameters and model structures. Particularly, we tested different epochs, different learning rates, and a shallow model in comparison to the original deep multi-layered one. 
-The model we created, like the original paper, was tested on financial and accounting data. Such data is tracked by corporations as part of a system called ERP (enterprise resource planning). (CITE HERE). SAP IS a big one (CITE HER). Such systems are vast data sets where each entry row has multiple columns as feature data points. ERP is used when a business has a need to track and edit complex sets of data. 
-•	Numerical: Such features are often numerical to track money or encode organization. Could be the amount of money in currency, the length of a product, the weight of a product, or more 
-•	Non-numerical: data could be the name of the person doing the entry, a time code, a location, a type of transaction, a cost center it is allocable to, or more. 
+Abstract
+In the modern world, financial and accounting data is vast and complex. With advances in technology, big data and its management is a large industry. With the scale of big data, systems are so large and complex that mistakes and fraud are inevitable. This has negative consequences for corporations, so there is a business incentive to account for, identify, manage, and prevent such risks. In a paper from (https://github.com/GitiHubi/deepAI) an Autoencoder deep learning model was used for accounting data analysis, a novel technique from the typical use of Autoencoder in image compression and reconstruction. In this paper, we implement and analyze the original model on the original dataset. This paper implements the analysis portion through examining the effects of tuning hyperparameters and model architecture, to identify what attributes make the model successful.
+Introduction
+First, we implemented the model from the original paper, then we built different models for the effects of different hyperparameters and model structure. In our work we tested different epochs, different learning rates, and a shallow model in comparison to the original deep multi-layered one.
+Background on Financial and Accounting Processes
+The model we created, like the original paper, was tested on accounting data. Such data is tracked by businesses as part of a system called ERP (enterprise resource planning), defined as “a software to help businesses streamline their core business processes” (https://www.sap.com/about/what-is-sap.html). ERP is used when a business has a need to track and edit complex sets of data. Such data included potentially thousands of data row entries, where each row contains a set number of column feature attributes. The types of features can be classified into the categories numeric and non-numeric, as defined below.
+·       Numerical Features: number values, could be amount of money, weight, length, physical dimension, etc.  
+·       Non-Numerical Features: features not represented in numerical format, could be name of company, time of day, location address, transaction type, cost center, etc.
+
+Figure. From original paper, showing database structure being an accounting transaction
+An example of an accounting process tracked in an ERP is shown in the figure. The transaction is illustrated in three levels: process, accounting, and database. The process level is simple: a supplier invoices the buyer $1000 for a good or service supplied, then the buyer sends the $1000 payment to the supplier, completing the transaction. The accounting level shows the tracking of the invoice as an expense, and tracks the invoice payment as credit, and when those equalize the transaction is complete. The database is where it starts to get complicated. Each transaction is a row, with columns tracking transaction data. This particular data tracks the company name, entry ID, fiscal year, type, data, and more.  
+The figure shows an accounting transaction specifically, but an ERP is a broad term that can apply to a variety of businesses, including different kinds of procurements, orders, sales, and more. There are a variety of possible ERP implementations, but there is one common denominator highlighting the challenges of any ERP: successfully managing vast data sets with thousands of entries, and potentially hundreds of rows for the feature elements.
+To the human eye, you might be able to catch a million-dollar outlier cost, but the challenge is when the outlier is hidden in the data. For example, consider data where each entry has dozens of features, and an outlier entry has a particular unusual combination of features values for that entry. The human mind isn’t equipped to observe that on our own, we need tools to do that. Machine Learning and particularly Deep Learning has a unique ability to find these hidden outliers.
+
+Figure. SAP sales billing data
+SAP is a prevalent ERP software used across various corporations today, SAP’s organization alone employs over 109,000+ employees across 157+ countries.  (https://www.sap.com/about/company.html#fast-factsl) In the figure is an example of a real life SAP business transaction. (https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-members/some-useful-tables-with-header-and-item-details/ba-p/13237198 ) A transaction in SAP is a command sent to the system, telling it to pull a specific data table according to specific criteria. This particular transaction is a command to pull a “sales billing table”. When SAP gets the command, it goes into the database and searches for each specific feature column needed for the transaction, as well as all the relevant row entries. It searches for sales billing data only, so it searches for entries that are entered when a sale is made. This data forms one large data table which is returned and shown on the screen. From here, the data can be filtered in each column to search for specific useful data points. The real-life usage of this could be to identify a particular sales entry within the larger returned data.
+Integration of Autoencoder Model with Accounting Data
+For the integration of our model with the accounting data, the first step was understanding the type of model we were seeking to build.
+
+Figure. From OG paper, showing integration of accounting data with Autoencoder model
+The Autoencoder model architecture is illustrated in the figure from the original paper. (cite figure). The dataset is a table with thousands of data entries and around 10 features, spread across two Excel spreadsheets. The non-numeric features must be encoded into numeric via one-hot encoding, so eventually all the data becomes numerical, and the data increases to hundreds of features. The data is then input into neural network layers, so it becomes “encoded” by being displayed in progressively fewer neurons. It eventually reaches its most compressed state of three neurons. Then, it is “decoded” symmetrically to the encoding. This means the number of layers and number of dimensions per layer are symmetrical, but each neuron doesn’t necessarily have the same weights and biases as its symmetric twin. However, the symmetric aspect of the Autoencoder allows data to be compressed smaller, then later expanded to replicate the input data. Any normal data should be output the same as before, but the outlier data output will change to become data that more closely resembles the normal data. At the end the reconstruction loss can be measured, where data with low loss is likely normal, whereas data with high loss are likely outliers. Thus, the loss metric is what can flag potential outliers, and further review can confirm the data to be true outliers.
+
+Figure. From OG paper showing global vs. local anomaly
+In the figure from the original paper (CITE HERE), the concept of “global” vs. “local” anomalies is illustrated. Each graph shows a plot of one feature vs. another feature for multiple data points.
+A global anomaly could be like when transactions are usually $2,000 but now there is a $1,000,000 transaction. It refers to a data entry where one specific feature has a clear quantifiable outlier, visually observable on a graph for example.
+A local anomaly is a data point where each entry feature is normal on its own, but the amalgamation of all the specific features together is unusual. Thus, the overall data point is an anomaly with everything put together. For example, if a raw wood materials supplier is invoicing an electronic component instead of the usual raw wood material. The raw wood supplier is in the system, electric components are in the system, but the fact that a wood supplier is buying electronics is an unusual combination.
+In this paper, we implemented three different models to compare the reconstruction loss of the different model structures.  
+Related Works
+	One study that we came across that we thought would  be helpful is "Detection of Anomalies in Large-Scale Accounting Data using Deep Autoencoder Networks" by Zahra Zamanzadeh Darban. Their strategy is to use the reconstruction error generated by the autoencoder and further refine them with individual attribute probabilities of journal entries. This duel faceted scoring system increases the adaptability
+Explanation of the model and what we did with it
+The first step in creating the model is a Python notebook that brings in the initialization to allow all the necessary Python libraries to create a model. Then we load the data from a Github webpage where the Excel spreadsheet is stored. We plot the data table in Python for convenience so that the model is pulled correctly.
+The actual data has some amount of normal data, but we also inject a small amount of global and local anomaly data (~0.03%) to see what the model detects for each anomaly type.
+We plot the distribution of numerical values to see how the distribution of data points is numerically. Based on the plot, the DMBTR and WRBTR values are most always low in number, except for a few high number outliers.
  
-https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-members/some-useful-tables-with-header-and-item-details/ba-p/13237198
-an example of what the data of a financial transaction would look like is the above. Here, a supplier invoices the buyer $1000 for a good or service supplied. Th buyer sends the $1000 payment. What this looks like in the data is that the specific important details of each transaction are tracked. Some important details include 
-•	Full name of the supplier company
-•	Specific internal code for that specific branch of the supplier company 
-•	Time, date, or year of transaction
-•	Where that invoiced amount will be sent to in terms of the buyer company. 
-•	How much money was the invoice 
-•	What currency was the invoice in
-This is to name a few, but this is customizable to track most any business process. The challenge is regardless of business process, this creates large data sets with thousands of entries, and potentially hundreds of rows for the feature elements. To the human eye, you might be able to catch a multi-million dollar outlier cost, but the challenge is when the data is more hidden. Perhaps a data point will have dozens fo features, and an outlier has a particular unusual combination of features values for that point. The human mind isn’t equipped to observe that on our own, we need tools to do that. However, machine learning and particularly deep learning has a unique ability to find these local outliers. 
+Figure. one -hot encoding of non-numeric data
+After implementing the data into the notebook, we have to perform data preprocessing on the data. For any non-numerical data, we turn that non-numeric feature into multiple one-hot features to represent all the unique string phrases of that non-numeric feature. The figure from the original paper has an example of this (CITE). Then, these new numerical features are combined with the original numerical features, thus resulting in a new dataset of all numerical features. The one-hot encoding transforms the data from around 10 features to 618 numerical features. 
+We implemented an autoencoder network that compresses the data throughout multiple deep layers, thus it is a ‘deep learning’ model. The data starts out with the 618 features as input, then reduces neurons each layer into gradually smaller dimension multiples of 2. It reduces from 618 to 512, its output becoming a multiple of 2. Then it goes 512 to 256, to 128, 64, 32, 16, 8, 4. Finally, it goes from 4 to 3. At this point it reaches the center of the Autoencoder, the most compressed format. Then, it decodes symmetrically in reference to the the number of encoding layers, and how many neurons each layer has. Also for this model, key hyperparameters are established. A learning rate is established to affect how much each forward step modified the weights and biases of each neuron. Epoch number is established to determine how many passes the model has over the data. Mini-batches are established to improve efficiency instead of a pass over the whole date for each epoch.
+The model trains in repeated passes, and we track the reconstruction loss over each epoch. We see that the model learns, and the loss goes down accordingly. Thus, it learns how to replicate the normal regular data and also convert outlier data into a normalized format. Now, in this context normalized means in terms of what made it an outlier before. The outliers are changed to be more normal in terms of a high-level combination of all the features in context. Throughout training, the reconstruction loss is tracked to measure how the model improves in detecting normal vs. outlier data. 
+Experiments/Results
+We test the original data on the original model and find that after training, outlier data can clearly be distinguished from normal data via measuring reconstruction loss. 
+
+Figure. OG reconstruction loss
+
+Figure. OG reconstruction loss for regular vs. the two outlier categories.
+The measured loss by the end of training is quite low, ~.0003. Visually, we can see the reconstruction loss is close to zero for the regular data, but for the global and local outliers it is between 0.1 and 0.6. From this we have a clear visual indicator of regular vs. outlier, and we can set a horizontal boundary line to distinguish the two categories. 
+We created a new model by changing the epoch hyperparameter from 5 to 50. 
+
+Figure. Epoch 50 reconstruction error
+We can see that past a certain point, the information gain from succeeding epochs decreases. We see that past 5 epochs, any knowledge gain is marginal, and at 8 epochs the model becomes more inaccurate for a couple epochs. 
+We also created a new model by changing the learning rate hyperparameter from 0.001 to 0.01.
+
+Figure. Learning rate .01 instead of .001 learning rate
+
+We notice that the reconstruction error goes from a decimal previously, to now above one and reaching 25 at its peak. We can conclude keeping the learning rate initialized at that lower value yields the best return. 
+Finally, we created a new model for shallow models instead of the deep learning multi-layered model.
+
+In this model, we go directly from the 618 transformed numeric input features, directly to 3 neurons. We notice that over multiple epochs the error goes down, although the magnitude of error starts at .03 and approaches 0.016. This new model never reaches the original small error of ~0.003.
+The technical innovation of this model is the ability to use an autoencoder to analyze financial and accounting data, instead of the usual other machine learning methods people have done before. In this model, we used the datasets provided in the original model to show that this novel approach could be used in real data pulled from SAP or another ERP platform for a businesses.
  
-Here is a common example of what an SAP transaction will pull up in terms of a data table. This is a real-life example that someone’s job in a real company may use. A transaction in SAP is like a command sent to the system, telling it to pull a specific data table that tracks specific information. This particular transaction is a command to pull sales billing data. When SAP gets the command, it goes into the database and searches for each specific column needed for the transaction, as well as all the relevant row entries. It searches for sales billing data only, so it searches for entries that are entered when a sale is made. This data forms one large data table which is returned and shown on the screen. From here, the data can be filtered in each column to search for specific useful data points. The real life useage of this could be to identify a particular sales entry within the large data. 
-
-First, we implemented the original code and ensured our understanding of it. First was understanding the type of model we were seeking to build. 
- 
-The model architecture is a typical autoencoder. Each data table set is a table with thousands of data entries, with dozens if not hundreds of features. Data that is characters must be reformatted into one hot, so eventually all the data becomes numerical. The data is fed into neural network layers, so it becomes “encoded” being displayed in gradually fewer nodes, in a compressed fashion. Then, it is “decoded” symmetrically to the encoding. Meaning the layers and number of dimensions are symmetrical, but each neuron doesn’t necessarily have the same weights and biases. But the part that is symmetrical allows it to be put into a compressed format, then unrolled. Any usual data should in theory roll out to be the same as before, and then the outlier when unrolled will change to become data points that look less like outliers. At the end the reconstruction loss can be measured, and anything with low loss is likely normal, whereas things with high loss are outliers. Thus, the loss is what can flag potential outliers, for real life review to confirm they are outliers. 
- 
-A global anomaly could be like when transactions are usually 2k but now there is a 1-million-dollar transaction. 
-A local anomaly is a data point where each entry feature on its own is normal in the universe, but rather the amalgamation of all the specific features together is unusual. Thus, the overall data point is an anomaly with everything put together. For example, if a raw materials supplier is invoicing an electronic component instead of the usual raw material of wood. 
-Second, we implemented three different other models to compare the seldom effects on reconstruction loss.  The analysis demonstrates the effects of hyperparameters and model architecture and results. 
-Explanation of the model and what we did with it 
-The first step in a model is a Python notebook that brings in the initialization to allow all the necessary Python libraries to create a model. We load the data from a webpage that goes to the site and downloads the Excel spreadsheet into the python notebook. We plot the data table in python for convenience so that the model is pulled correctly. 
-The actual data has some amount of normal data, but we also inject a small amount of global and local anomaly data to see what the model detects for each anomaly type. 
-We plot the distribution of numerical values to see how the distribution of data points is. Based on the plot, the dmbtr and wrbtr values are most always low in number, except for a few high number outliers. 
-
-We have to do some data transformation fo the data, which is mostly the following. For any non-numerical data, we turn each feature into multiple one-hot features to represent all the unique string phrases of the original features. Then, these new numerical features are combined with the original numerical features, thus resulting in a new dataset of all numerical features. 
-
-
-We implemented an autoencoder network that compresses the data throughout multiple layers, thus ‘deep’ learning. It starts out with the original 618 features, then reduces layers to neuron layers of multiple of 2. It reduces from 618 to 512. Then 512 to 256, 128, 64, 32, 16, 8, 4. Then it does 4 to 3. At this point it reaches the center of the autoencoder, the most compressed format. Then, it decodes symmetrically in terms of the number of decoding layers, and how many neurons each layer has. For this model, a learning rate is established to affect how much each step tweaks the weights and biases. Several epochs is established to determine how many passes it does over the data. Mini batches are established to improve efficiency instead of a pass over the WHOLE date for each epoch. 
-The model trains repetitively, and we track the reconstruction loss over each epoch. We see that the model learns, and the loss goes down accordingly. Thus, it learns how to replicate the normal regular data and turn outlier data into a normalized format. Normalized in terms of, what made it an outlier before is changed to be more normal in a high-level combo of all the features context. 
-
-
- 
-For autoencoders, analysis needs to be on numerical data. In real life, this type of data might be in a word format, so we need a mathematical way to effectively turn the data into equivalent numerical format. Thus, comes in “one-hot encoding”. In this, instead of one feature of multiple words, it splits up into multiple features each for each unique word. For example, A/B/C one feature becomes feature a, feature b, feature c. When the datapoint is A the value is 1 else 0. When the data point is B is 1 and if not its 0. Thus, when the value is that specific string it assigns some custom weight to it, otherwise it gives it no weight. Another one hot method could be if true 1 else if not true 0. It depends on if you want to be penalized for not being something, or if you just don’t want that to have an effect . we create a class for the encoder and one for the decoder, and we see that each one has symmetrical number of layers, and each layer has a symmetrical number of neurons in each. What is Not symmetrical is that during the training, each specific neuron learns a unique weight and bias parameters. So those are NOT symmetrical across the autoencoder. But what it DOES do is enable the compression and expansion to keep the normal data as is and turn outlier data into a normalized version of that outlier. Later, we compare reconstruction loss, and the outlier are the ones that have the loss. We can set a numerical threshold to flag the data as outlier, if loss is above the threshold. This generally should identify outliers as is, and this is the step in real life where manual human review or a different code review would come in. This would identify outlier that are Local in addition to global, which is where it’s useful. 
-Experiments/Results 
-We test the normal data and find that it can identify 
-We will create a new table for 50 epochs instead of 5
-We have created a new model for 0.001 instead of .0001 learning rate 
-We create a new model for shallow models instead of the deep learning deep layered model. 
-Tech innovation is the ability to use an autoencoder to analyze financial and accounting data, instead of the usual other machine learning methods people have done before. In this model, we used the datasets provided in the original, real accounting data to show that this novel approach could be used in real data pulled from SAP or another ERP platform for a businesses
-
-Potential future applications of this data could be this used in tandem with another software, to directly interface with an ERP and set flagged entries up for automated or manual review. Perhaps a report of monthly bad entries could be sent to compliance. Or, perhaps an automated process could flag those for review first. There are both automatic and manual possibilities. 
+Potential future applications of this data could be used in tandem with other software, to directly interface with an ERP and set flagged entries up for automated or manual review. Perhaps a report of monthly bad entries could be sent to compliance. Or, perhaps an automated process could flag those for review first. There are both automatic and manual possibilities.
 Limitations
-There is the model limitations, then also the limitations of real-life data, and the complexity of data 
-The model itself may not be accurate enough to detect specific close data, so there might be false positive that cause delays. It could be false negatives too which slip through the cracks and are more severe
-Then there is limitation of real-life data. Perhaps real-life data isn’t accurate for the data points or is missing a data feature that if we did have, could easily help identify outliers. 
-Real life data is complex and although deep learning is abstract, so are real life principles. No model is perfect, each model is generally a specialized model to meet a certain thing, but again no model in science is perfect. 
-Ethics Statement 
-This is a model and no model is perfect, therefore applications of our different models should be used with discretion. One should also implement manual human analysis to check a few things. One to make sure it is ethical to even use the specific data you are planning to use. Two, if a conclusion is reached from the model analyzing data, according following decisions should be made ethically. Third, in general this model shouldn’t be used for harm or evil. 
-Acknowledgements 
-f
-References 
+There is the model limitations, then also the limitations of real-life data, and the complexity of data. 
+The model itself may not be accurate enough to detect specific close data, so there might be false positives that cause delays via review of normal data. There could also be false negatives too, which run the risk of incorrect if not fraudulent data being missed and its consequences affecting a business. 
+Then there is the limitation of real-life data. Perhaps real-life data isn’t accurate for the data points or is missing a data feature that if we did have, it could easily help identify outliers. 
+Real life data is complex and although deep learning is abstract, so are real life principles. No model is perfect, each model is generally a specialized model to meet a certain thing, but again no model in science is perfect.
+Ethics Statement
+This is a model and no model is perfect, therefore applications of our different models should be used with discretion. One should also implement manual human analysis to check a few things. One to make sure it is ethical to even use the specific data you are planning to use. Two, if a conclusion is reached from the model analyzing data, following decisions should be made ethically. Third, in general this model shouldn’t be used for harm or evil.
+Acknowledgements
+We would like to thank the original model authors and paper authors. We would also like to thank NJIT and particularly professor Islam and professor Koutis for their support. 
+References
 https://github.com/GitiHubi/deepAI
 https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-members/some-useful-tables-with-header-and-item-details/ba-p/13237198
 https://www.sap.com/about/what-is-sap.html
-Appendices 
-f
 
-----
+Appendices
+* inset all the figures here
+ 
+
+ 
+
 
 
