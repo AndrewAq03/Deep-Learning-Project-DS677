@@ -31,13 +31,13 @@ https://github.com/GitiHubi/deepAI
 
 - [x] Only adding code to existing colab with consensus from group 
 
-- [ ] Potentially meet with professor to clarify we are on the right page, and seek feedback
+- [x] Potentially meet with professor to clarify we are on the right page, and seek feedback
 
 **Week 3 (due 5/4)**
 
-- [ ] Writing the report document to explain our code and our model
+- [x] Writing the report document to explain our code and our model
 
-- [ ] Drafting concept for the video
+- [x] Drafting concept for the video
 
 **Week 4 (due due 5/11, final project due)**
 
