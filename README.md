@@ -13,7 +13,7 @@ https://github.com/GitiHubi/deepAI
 
 
 
-
+If above video does not work: https://www.youtube.com/watch?v=2wXD_O04ffg
 
 
 
