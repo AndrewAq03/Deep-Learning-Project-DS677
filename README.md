@@ -4,10 +4,7 @@ A repository for our Deep Learning Project
 
 This also a link to the repository we will be using as a reference for our Project:
 
-https://github.com/GitiHubi/deepAI
-
-
-
+https://github.com/GitiHubi/deepAI <br><br>
 
 
 ## Video Presentation of our Project
@@ -15,13 +12,12 @@ https://github.com/GitiHubi/deepAI
 
 
 
-
-If above video does not work: https://www.youtube.com/watch?v=2wXD_O04ffg
-
+If above video does not work: https://www.youtube.com/watch?v=2wXD_O04ffg <br><br>
 
 
 
-**Objective: Create code, report, and video to explain our DL model.**
+
+## **Objective: Create code, report, and video to explain our DL model.**
 
 **Week 1 (due 4/20)**
 
