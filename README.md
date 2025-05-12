@@ -8,12 +8,16 @@ https://github.com/GitiHubi/deepAI
 
 
 
+
+
 ## Video Presentation of our Project
 [![Deep Learning Project DS677 - Group 8 ](https://img.youtube.com/vi/2wXD_O04ffg/0.jpg)](https://www.youtube.com/watch?v=2wXD_O04ffg)
 
 
 
+
 If above video does not work: https://www.youtube.com/watch?v=2wXD_O04ffg
+
 
 
 
